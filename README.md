@@ -83,7 +83,7 @@ If you use this code, please cite the manuscript (under review):
 ```bibtex
 @article{guo2026noiseadapted,
   title   = {Noise-adapted single-lead AI-ECG for hypertrophy screening: development and external validation in PTB-XL, Chapman-Shaoxing, and Georgia},
-  author  = {Guo, Jinkai and Chen, Hua and Wang, Yu and Song, Xiaopeng and Chang, Hao and Lv, Yueqi and Li, Mengfan and Chang, Jiaxin and Yang, Chongdan and Zhou, Rongfang and Zhang, Shujie},
+  author  = {Guo, Jinkai and Chen, Hua and Wang, Yu and Song, Xiaopeng and Chang, Hao and Lv, Yueqi and Li, Mengfan and Chang, Jia xin and Yang, Chongdan and Zhou, Rongfang and Zhang, Shujie},
   journal = {Journal of Electrocardiology},
   year    = {2026},
   note    = {Under review}
