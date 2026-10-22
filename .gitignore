@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.DS_Store
+data/
+outputs/
+*.pt
+*.pth
+*.ckpt
+figures/submission/

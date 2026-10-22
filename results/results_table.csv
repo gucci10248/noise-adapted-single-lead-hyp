@@ -1,0 +1,7 @@
+cohort,model,n,n_pos,prevalence,auroc,auroc_95ci,auprc,auprc_95ci,ece,note
+PTB-XL test,clean v1,2198,262,0.1192,0.7874,0.756-0.820,0.4221,0.364-0.490,0.217,"internal, official fold 10"
+PTB-XL test,noise-aug v1.3,2198,262,0.1192,0.7797,0.748-0.814,0.4154,0.355-0.486,0.2065,"internal, official fold 10"
+Chapman-Shaoxing,clean v1,2769,769,0.2777,0.8847,0.870-0.898,0.7615,0.731-0.793,0.0999,"case-control, expert SNOMED labels"
+Chapman-Shaoxing,noise-aug v1.3,2769,769,0.2777,0.8826,0.867-0.896,0.7621,0.730-0.793,0.0998,"case-control, expert SNOMED labels"
+Georgia (Emory),clean v1,10344,1305,0.1262,0.7105,0.696-0.725,0.2917,0.265-0.315,0.2866,"natural prevalence, report-derived SNOMED labels"
+Georgia (Emory),noise-aug v1.3,10344,1305,0.1262,0.718,0.703-0.732,0.2842,0.261-0.307,0.2743,"natural prevalence, report-derived SNOMED labels"

@@ -1,0 +1,3 @@
+model,ptbxl_test_n,ptbxl_test_auroc,ptbxl_test_auroc_ci,ptbxl_test_auprc,ptbxl_test_ece,chapman_n,chapman_auroc,chapman_auroc_ci,chapman_auprc,chapman_ece,chapman_sens_at_sens90,chapman_spec_at_sens90,ptbxl_auroc_noise4x,chapman_auroc_noise4x
+Clean-trained,2198,0.7874,0.756-0.820,0.4221,0.217,2769,0.8847,0.870-0.898,0.7615,0.0999,0.9122,0.3915,0.6606,0.7274
+Noise-augmented,2198,0.7797,0.748-0.814,0.4154,0.2065,2769,0.8826,0.867-0.896,0.7621,0.0998,0.916,0.3662,0.7599,0.8682

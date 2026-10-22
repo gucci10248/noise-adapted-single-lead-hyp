@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the manuscript and the original datasets."
+title: "Noise-adapted single-lead AI-ECG for hypertrophy screening: development and external validation in PTB-XL, Chapman-Shaoxing, and Georgia"
+version: 1.0.0
+date-released: 2026-10-22
+license: MIT
+type: software
+authors:
+  - family-names: Guo
+    given-names: Jinkai
+  - family-names: Chen
+    given-names: Hua
+  - family-names: Wang
+    given-names: Yu
+  - family-names: Song
+    given-names: Xiaopeng
+  - family-names: Chang
+    given-names: Hao
+  - family-names: Lv
+    given-names: Yueqi
+  - family-names: Li
+    given-names: Mengfan
+  - family-names: Chang
+    given-names: Jiaxin
+  - family-names: Yang
+    given-names: Chongdan
+  - family-names: Zhou
+    given-names: Rongfang
+  - family-names: Zhang
+    given-names: Shujie
+repository-code: "https://github.com/gucci10248/noise-adapted-single-lead-hyp"
+references:
+  - type: article
+    title: "Noise-adapted single-lead AI-ECG for hypertrophy screening: development and external validation in PTB-XL, Chapman-Shaoxing, and Georgia"
+    authors:
+      - family-names: Guo
+        given-names: Jinkai
+      - family-names: Chen
+        given-names: Hua
+    year: 2026
+    journal: "Journal of Electrocardiology"
+    notes: "Under review"

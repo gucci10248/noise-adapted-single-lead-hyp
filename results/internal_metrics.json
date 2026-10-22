@@ -1,0 +1,115 @@
+{
+  "task": "HYP binary screening",
+  "lead": "I",
+  "sampling_hz": 100,
+  "splits": "train folds1-8 / val fold9 / test fold10",
+  "seed": 42,
+  "augmentation": true,
+  "tag": "hyp_v1_aug",
+  "n": {
+    "train": 17418,
+    "val": 2183,
+    "test": 2198
+  },
+  "pos_rate": {
+    "train": 0.12165575474500656,
+    "val": 0.12276683747768402,
+    "test": 0.11919926851987839
+  },
+  "baseline_age_sex": {
+    "val": {
+      "auroc": 0.6281906394918358,
+      "auprc": 0.17399569911762022,
+      "pos_rate": 0.12276683747768402,
+      "n": 2183
+    },
+    "test": {
+      "auroc": 0.6057139533783358,
+      "auprc": 0.15040715260764495,
+      "pos_rate": 0.11919926851987839,
+      "n": 2198
+    }
+  },
+  "cnn": {
+    "val": {
+      "auroc": 0.782192821791824,
+      "auprc": 0.3804765731016794,
+      "pos_rate": 0.12276683747768402,
+      "n": 2183
+    },
+    "test": {
+      "auroc": 0.7797181565831808,
+      "auprc": 0.4154046885901092,
+      "pos_rate": 0.11919926851987839,
+      "n": 2198
+    },
+    "best_val_auroc": 0.782192821791824
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.0370592291038392,
+      "val_auroc": 0.7390475819336737,
+      "val_auprc": 0.3222879037026196
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.9990413701688946,
+      "val_auroc": 0.7712326097969682,
+      "val_auprc": 0.35895253126486715
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.9785713293424004,
+      "val_auroc": 0.7672752425860254,
+      "val_auprc": 0.359807155313262
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.9750076709761112,
+      "val_auroc": 0.7758738942363897,
+      "val_auprc": 0.37754447481988823
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.9657045211046267,
+      "val_auroc": 0.7760823818245586,
+      "val_auprc": 0.37254235717761486
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.9622500696409747,
+      "val_auroc": 0.782192821791824,
+      "val_auprc": 0.3804765731016794
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.959628457302532,
+      "val_auroc": 0.7767097930711976,
+      "val_auprc": 0.36876059924259685
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.952883578986631,
+      "val_auroc": 0.7816063286699662,
+      "val_auprc": 0.370417908199271
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.9509869821995021,
+      "val_auroc": 0.7645415221542418,
+      "val_auprc": 0.36293545956435136
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.9500822820131261,
+      "val_auroc": 0.7730836678227659,
+      "val_auprc": 0.36624807033066
+    }
+  ],
+  "artifacts": {
+    "checkpoint": "/Users/mac/Desktop/\u6587\u7a3f\u5e93/\u6587\u7ae0/ai_ecg_hf/outputs/hyp_v1_aug/best_model.pt",
+    "roc": "/Users/mac/Desktop/\u6587\u7a3f\u5e93/\u6587\u7ae0/ai_ecg_hf/figures/hyp_v1_aug_test_roc.png",
+    "curves": "/Users/mac/Desktop/\u6587\u7a3f\u5e93/\u6587\u7ae0/ai_ecg_hf/figures/hyp_v1_aug_curves.png"
+  }
+}
