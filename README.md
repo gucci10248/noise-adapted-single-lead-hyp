@@ -1,8 +1,8 @@
-# Noise-adapted single-lead AI-ECG for hypertrophy screening
+# Noise-robust single-lead AI-ECG for hypertrophy screening
 
-Code and analysis for the manuscript:
+Code and analysis for the manuscript (target: *Computer Methods and Programs in Biomedicine*):
 
-> **Noise-adapted single-lead AI-ECG for hypertrophy screening: development and external validation in PTB-XL, Chapman-Shaoxing, and Georgia**
+> **Noise-robust single-lead AI-ECG for hypertrophy screening: augmentation ablation, external validation, and recalibration across label sources**
 
 The model is a compact one-dimensional CNN (52,225 parameters) that estimates the probability of the PTB-XL HYP diagnostic superclass from a 10-s, 100-Hz, single-lead (Lead I) ECG. Training uses wearable-like noise augmentation (Gaussian noise, baseline wander, random dropout). The model is evaluated internally on PTB-XL fold 10 and externally on Chapman-Shaoxing and the Georgia 12-Lead ECG Challenge Database.
 
@@ -17,6 +17,15 @@ The model is a compact one-dimensional CNN (52,225 parameters) that estimates th
 | Georgia (Emory, natural prevalence) | 10,344 | 1,305 (12.62) | 0.718 (0.703–0.732) | 0.284 (0.261–0.307) | 0.274 |
 
 Across three training seeds (42–44), AUROC was 0.787 ± 0.007 (PTB-XL), 0.885 ± 0.005 (Chapman), and 0.725 ± 0.009 (Georgia). At 4× training noise severity, AUROC was 0.760 vs 0.661 (PTB-XL, noise-augmented vs clean), 0.868 vs 0.727 (Chapman), and 0.682 vs 0.586 (Georgia).
+
+## Strengthening analyses
+
+| Analysis | Main result |
+|---|---|
+| Baselines | ResNet 0.795/0.870/0.749; compact CNN 0.780/0.883/0.718; feature trees 0.763/0.833/0.716; age-sex 0.606/0.662/0.511 |
+| Augmentation ablation | At 4×, full 0.760/0.868/0.682; wander-only 0.756/0.850/0.685; Gaussian-only 0.664/0.733/0.590; none 0.661/0.727/0.586 |
+| Test-time augmentation | No AUROC gain (4×: 0.754/0.859/0.676 for TTA-1×) |
+| External recalibration | Platt ECE 0.035 (Chapman) and 0.011 (Georgia); temperature scaling did not correct the intercept |
 
 ## Data
 
@@ -71,6 +80,13 @@ pyproject.toml
 | `scripts/decision_curve_analysis.py` | Decision curve analysis (PTB-XL, Georgia) |
 | `scripts/explainability_occlusion.py` | Occlusion sensitivity analysis |
 | `scripts/eval_seed_variability.py` | Seed-to-seed variability (42–44) |
+| `scripts/train_baseline_resnet.py` | 1D ResNet baseline |
+| `scripts/eval_baselines.py` | Age-sex/feature/tree/ResNet baseline comparison |
+| `scripts/train_aug_ablation.py` | Gaussian/wander/dropout ablation models |
+| `scripts/eval_aug_ablation.py` | Augmentation-component ablation |
+| `scripts/eval_tta.py` | Test-time augmentation |
+| `scripts/eval_external_recalibration.py` | Platt/temperature external recalibration |
+| `scripts/eval_resnet_noise.py` | ResNet noise robustness |
 
 ## Model card
 
@@ -82,9 +98,9 @@ If you use this code, please cite the manuscript (under review):
 
 ```bibtex
 @article{guo2026noiseadapted,
-  title   = {Noise-adapted single-lead AI-ECG for hypertrophy screening: development and external validation in PTB-XL, Chapman-Shaoxing, and Georgia},
+  title   = {Noise-robust single-lead AI-ECG for hypertrophy screening: augmentation ablation, external validation, and recalibration across label sources},
   author  = {Guo, Jinkai and Chen, Hua and Wang, Yu and Song, Xiaopeng and Chang, Hao and Lv, Yueqi and Li, Mengfan and Chang, Jia xin and Yang, Chongdan and Zhou, Rongfang and Zhang, Shujie},
-  journal = {Journal of Electrocardiology},
+  journal = {Computer Methods and Programs in Biomedicine},
   year    = {2026},
   note    = {Under review}
 }

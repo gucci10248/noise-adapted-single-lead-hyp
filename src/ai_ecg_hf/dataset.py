@@ -33,18 +33,24 @@ def add_wearable_like_noise(
     sigma: float = 0.05,
     wander_amp: float = 0.1,
     dropout_p: float = 0.2,
+    use_gaussian: bool = True,
+    use_wander: bool = True,
+    use_dropout: bool = True,
 ) -> np.ndarray:
     """Add wearable-like corruption (Gaussian, baseline wander, dropout).
 
     Defaults reproduce the v1 training augmentation.  The keyword arguments
-    allow severity sweeps for noise-robustness evaluation while keeping the
-    random-draw sequence identical to the original implementation.
+    allow severity sweeps and component ablations while keeping the
+    random-draw sequence identical to the original implementation when all
+    components are enabled.
     """
     y = x.copy()
-    y = y + rng.normal(0.0, sigma, size=y.shape).astype(np.float32)
-    t = np.arange(y.shape[0], dtype=np.float32)
-    y = y + (wander_amp * np.sin(2 * np.pi * t / max(y.shape[0], 1))).astype(np.float32)
-    if rng.random() < dropout_p:
+    if use_gaussian:
+        y = y + rng.normal(0.0, sigma, size=y.shape).astype(np.float32)
+    if use_wander:
+        t = np.arange(y.shape[0], dtype=np.float32)
+        y = y + (wander_amp * np.sin(2 * np.pi * t / max(y.shape[0], 1))).astype(np.float32)
+    if use_dropout and rng.random() < dropout_p:
         a, b = sorted(rng.integers(0, y.shape[0], size=2))
         if b > a:
             y[a:b] = 0.0

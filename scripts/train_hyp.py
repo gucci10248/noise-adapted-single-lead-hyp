@@ -44,6 +44,13 @@ BATCH = 64
 LR = 1e-3
 PATIENCE = 4
 POS = ("HYP",)
+AUG_MODES = {
+    "full": dict(use_gaussian=True, use_wander=True, use_dropout=True),
+    "gaussian": dict(use_gaussian=True, use_wander=False, use_dropout=False),
+    "wander": dict(use_gaussian=False, use_wander=True, use_dropout=False),
+    "dropout": dict(use_gaussian=False, use_wander=False, use_dropout=True),
+    "none": dict(use_gaussian=False, use_wander=False, use_dropout=False),
+}
 
 
 def set_seed(seed: int) -> None:
@@ -127,9 +134,11 @@ def train_one_epoch(
     x_np: np.ndarray | None = None,
     y_np: np.ndarray | None = None,
     use_live_aug: bool = False,
+    aug_mode: str = "full",
     seed: int = SEED,
 ) -> float:
     model.train()
+    aug_kwargs = AUG_MODES[aug_mode]
     total, n = 0.0, 0
     rng = np.random.default_rng(seed + int(torch.randint(0, 10_000, ()).item()))
     for xb, yb in loader:
@@ -137,7 +146,7 @@ def train_one_epoch(
             # light batch-wise wearable-like noise on already-loaded tensors
             arr = xb.numpy()
             for i in range(arr.shape[0]):
-                arr[i, 0] = add_wearable_like_noise(arr[i, 0], rng)
+                arr[i, 0] = add_wearable_like_noise(arr[i, 0], rng, **aug_kwargs)
             xb = torch.from_numpy(arr)
         xb, yb = xb.to(device), yb.to(device)
         opt.zero_grad()
@@ -188,12 +197,20 @@ def main() -> None:
         help="disable wearable-like augmentation (clean baseline)",
     )
     parser.add_argument(
+        "--aug-mode",
+        choices=sorted(AUG_MODES),
+        default="full",
+        help="training augmentation components (default: full)",
+    )
+    parser.add_argument(
         "--tag",
         type=str,
         default="hyp_v1",
         help="output subdirectory under outputs/ and figure prefix",
     )
     args = parser.parse_args()
+    if args.no_aug:
+        args.aug_mode = "none"
 
     set_seed(args.seed)
     device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
@@ -202,7 +219,7 @@ def main() -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
     fig_dir.mkdir(parents=True, exist_ok=True)
 
-    print(f"device={device} tag={args.tag} seed={args.seed} aug={not args.no_aug}")
+    print(f"device={device} tag={args.tag} seed={args.seed} aug_mode={args.aug_mode}")
     x_tr, y_tr, m_tr = preload("train", seed=args.seed)
     x_va, y_va, m_va = preload("val", seed=args.seed)
     x_te, y_te, m_te = preload("test", seed=args.seed)
@@ -240,7 +257,8 @@ def main() -> None:
             opt,
             loss_fn,
             device,
-            use_live_aug=not args.no_aug,
+            use_live_aug=args.aug_mode != "none",
+            aug_mode=args.aug_mode,
             seed=args.seed,
         )
         va_logits = predict_logits(model, x_va, device)
@@ -293,7 +311,8 @@ def main() -> None:
             "model": best_state,
             "seed": args.seed,
             "pos": list(POS),
-            "augmentation": not args.no_aug,
+            "augmentation": args.aug_mode != "none",
+            "aug_mode": args.aug_mode,
         },
         ckpt,
     )
@@ -304,7 +323,8 @@ def main() -> None:
         "sampling_hz": 100,
         "splits": "train folds1-8 / val fold9 / test fold10",
         "seed": args.seed,
-        "augmentation": not args.no_aug,
+        "augmentation": args.aug_mode != "none",
+        "aug_mode": args.aug_mode,
         "tag": args.tag,
         "n": {"train": int(len(y_tr)), "val": int(len(y_va)), "test": int(len(y_te))},
         "pos_rate": {

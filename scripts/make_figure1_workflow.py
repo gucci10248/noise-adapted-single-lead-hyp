@@ -81,9 +81,10 @@ def main() -> None:
         0.12,
         0.80,
         0.20,
-        "Evaluation\nAUROC / AUPRC (bootstrap 95% CI)  ·  calibration (ECE, temperature scaling)\n"
+        "Evaluation\nAUROC / AUPRC (bootstrap 95% CI)  ·  calibration (ECE, slope, Platt/temperature)\n"
         "subgroups (LVH-only, RVH/RAH-only, sex, age)  ·  noise robustness (0–4× training severity)\n"
-        "age + sex logistic baseline  ·  PPV / NPV at cohort prevalence",
+        "baselines (age-sex, features, trees, ResNet)  ·  ablation (none/Gaussian/wander/dropout/full)\n"
+        "test-time augmentation  ·  external recalibration  ·  PPV / NPV at cohort prevalence",
         fc="#EDEDED",
         ec="#595959",
         fs=8.5,
@@ -91,7 +92,7 @@ def main() -> None:
     arrow(ax, 0.65, 0.55, 0.55, 0.32)
     arrow(ax, 0.86, 0.55, 0.65, 0.32)
 
-    ax.text(0.02, 0.97, "Model development and external validation", fontsize=13, fontweight="bold")
+    ax.text(0.02, 0.985, "Model development, benchmarking, and external validation", fontsize=12, fontweight="bold")
     fig.tight_layout()
     OUT.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(OUT, dpi=300, bbox_inches="tight")

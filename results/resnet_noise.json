@@ -1,0 +1,96 @@
+{
+  "severities": [
+    0.0,
+    1.0,
+    4.0
+  ],
+  "n_draws": 3,
+  "noise": {
+    "base_sigma": 0.05,
+    "base_wander": 0.1,
+    "base_dropout": 0.2
+  },
+  "rows": [
+    {
+      "model": "resnet",
+      "cohort": "ptbxl",
+      "severity": 0.0,
+      "auroc_mean": 0.7947310106617879,
+      "auroc_sd": 0.0,
+      "auprc_mean": 0.43286171554789166,
+      "auprc_sd": 0.0
+    },
+    {
+      "model": "resnet",
+      "cohort": "ptbxl",
+      "severity": 1.0,
+      "auroc_mean": 0.7896741530502807,
+      "auroc_sd": 0.0011307009026219434,
+      "auprc_mean": 0.4137071432312007,
+      "auprc_sd": 0.0014004769737990235
+    },
+    {
+      "model": "resnet",
+      "cohort": "ptbxl",
+      "severity": 4.0,
+      "auroc_mean": 0.7811303966100982,
+      "auroc_sd": 0.003233428967454545,
+      "auprc_mean": 0.40732110347059347,
+      "auprc_sd": 0.008598493498726444
+    },
+    {
+      "model": "resnet",
+      "cohort": "chapman",
+      "severity": 0.0,
+      "auroc_mean": 0.8698569570871262,
+      "auroc_sd": 0.0,
+      "auprc_mean": 0.7283767299993236,
+      "auprc_sd": 0.0
+    },
+    {
+      "model": "resnet",
+      "cohort": "chapman",
+      "severity": 1.0,
+      "auroc_mean": 0.8666131339401821,
+      "auroc_sd": 0.000951340619650534,
+      "auprc_mean": 0.723400271458393,
+      "auprc_sd": 0.0015390798525276828
+    },
+    {
+      "model": "resnet",
+      "cohort": "chapman",
+      "severity": 4.0,
+      "auroc_mean": 0.8685894018205461,
+      "auroc_sd": 0.0027138554603075944,
+      "auprc_mean": 0.7240097614104056,
+      "auprc_sd": 0.007436039956305696
+    },
+    {
+      "model": "resnet",
+      "cohort": "georgia",
+      "severity": 0.0,
+      "auroc_mean": 0.7491655359767107,
+      "auroc_sd": 0.0,
+      "auprc_mean": 0.3295985371370585,
+      "auprc_sd": 0.0
+    },
+    {
+      "model": "resnet",
+      "cohort": "georgia",
+      "severity": 1.0,
+      "auroc_mean": 0.7461123128003427,
+      "auroc_sd": 0.0018018012489802316,
+      "auprc_mean": 0.32426411301181207,
+      "auprc_sd": 0.001594089915205249
+    },
+    {
+      "model": "resnet",
+      "cohort": "georgia",
+      "severity": 4.0,
+      "auroc_mean": 0.7171384056346155,
+      "auroc_sd": 0.0007517040377841503,
+      "auprc_mean": 0.2874447685522854,
+      "auprc_sd": 0.0028099923307502005
+    }
+  ]
+}

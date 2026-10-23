@@ -1,0 +1,22 @@
+{
+  "test_severities": [
+    0.0,
+    0.5,
+    1.0,
+    2.0,
+    4.0
+  ],
+  "tta_severities": {
+    "standard": 0.0,
+    "tta_1x": 1.0,
+    "tta_4x": 4.0
+  },
+  "n_tta": 5,
+  "n_test_draws": 3,
+  "noise": {
+    "base_sigma": 0.05,
+    "base_wander_amp": 0.1,
+    "base_dropout_p": 0.2
+  },
+  "checkpoint": "/Users/mac/Desktop/\u6587\u7a3f\u5e93/\u6587\u7ae0/ai_ecg_hf/outputs/hyp_v1_aug/best_model.pt"
+}

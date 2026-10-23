@@ -111,3 +111,34 @@ python scripts/collect_results.py                # combined results table
   unchanged to test/external cohorts.
 - No external data are used for training or fine-tuning.
 - The code is research-use-only; it is not a medical device.
+
+## 8. CMPB strengthening analyses
+
+```bash
+# Baselines
+python scripts/train_baseline_resnet.py --tag hyp_resnet --seed 42
+python scripts/eval_baselines.py --n-boot 500
+
+# Augmentation-component ablation
+python scripts/train_aug_ablation.py
+python scripts/eval_aug_ablation.py
+
+# Test-time augmentation
+python scripts/eval_tta.py --n-tta 5
+
+# External recalibration
+python scripts/eval_external_recalibration.py --repeats 10
+
+# ResNet noise robustness
+python scripts/eval_resnet_noise.py
+```
+
+Expected outputs:
+
+| Output | Content |
+|---|---|
+| `outputs/baselines/baseline_metrics.csv` | Age-sex, feature logistic, feature trees, ResNet, compact CNN |
+| `outputs/aug_ablation/ablation_metrics.csv` | None/Gaussian/wander/dropout/full at 0–4× |
+| `outputs/tta/tta_metrics.csv` | Standard vs TTA-1× vs TTA-4× |
+| `outputs/recalibration/recalibration_summary.csv` | Platt/temperature recalibration |
+| `outputs/resnet_noise/resnet_noise.csv` | ResNet noise robustness |

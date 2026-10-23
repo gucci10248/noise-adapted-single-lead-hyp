@@ -1,0 +1,81 @@
+{
+  "seed": 42,
+  "n_boot": 300,
+  "feature_names": [
+    "mean",
+    "std",
+    "min",
+    "max",
+    "ptp",
+    "median",
+    "iqr",
+    "skew",
+    "kurtosis",
+    "p05",
+    "p25",
+    "p75",
+    "p95",
+    "frac_positive",
+    "frac_large_derivative",
+    "rms",
+    "energy",
+    "mean_abs",
+    "max_abs",
+    "mean_abs_derivative",
+    "std_derivative",
+    "max_abs_derivative",
+    "band_0p5_4",
+    "band_4_8",
+    "band_8_16",
+    "band_16_32",
+    "band_32_50",
+    "spectral_entropy",
+    "dominant_freq",
+    "n_peaks",
+    "heart_rate",
+    "rr_mean",
+    "rr_std",
+    "rr_cv",
+    "peak_prominence_mean",
+    "peak_prominence_max",
+    "positive_area",
+    "negative_area",
+    "rs_ratio"
+  ],
+  "models": {
+    "age_sex": {
+      "params": 2,
+      "features": "age, sex"
+    },
+    "feature_logistic": {
+      "params": null,
+      "features": 39
+    },
+    "feature_trees": {
+      "params": null,
+      "features": 39
+    },
+    "resnet": {
+      "params": 437569,
+      "features": "raw Lead I"
+    },
+    "tiny_cnn_aug": {
+      "params": 52225,
+      "features": "raw Lead I"
+    }
+  },
+  "cohorts": {
+    "ptbxl_test": {
+      "n": 2198,
+      "pos_rate": 0.11919926851987839
+    },
+    "chapman": {
+      "n": 2769,
+      "pos_rate": 0.27771759033203125
+    },
+    "georgia": {
+      "n": 10344,
+      "pos_rate": 0.12616010010242462
+    }
+  }
+}

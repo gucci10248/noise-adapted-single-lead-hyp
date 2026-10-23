@@ -1,0 +1,22 @@
+{
+  "severities": [
+    0.0,
+    0.5,
+    1.0,
+    2.0,
+    4.0
+  ],
+  "n_draws": 3,
+  "noise": {
+    "base_sigma": 0.05,
+    "base_wander_amp": 0.1,
+    "base_dropout_p": 0.2
+  },
+  "checkpoints": {
+    "none": "/Users/mac/Desktop/\u6587\u7a3f\u5e93/\u6587\u7ae0/ai_ecg_hf/outputs/hyp_v1/best_model.pt",
+    "gaussian": "/Users/mac/Desktop/\u6587\u7a3f\u5e93/\u6587\u7ae0/ai_ecg_hf/outputs/hyp_abl_gaussian/best_model.pt",
+    "wander": "/Users/mac/Desktop/\u6587\u7a3f\u5e93/\u6587\u7ae0/ai_ecg_hf/outputs/hyp_abl_wander/best_model.pt",
+    "dropout": "/Users/mac/Desktop/\u6587\u7a3f\u5e93/\u6587\u7ae0/ai_ecg_hf/outputs/hyp_abl_dropout/best_model.pt",
+    "full": "/Users/mac/Desktop/\u6587\u7a3f\u5e93/\u6587\u7ae0/ai_ecg_hf/outputs/hyp_v1_aug/best_model.pt"
+  }
+}
