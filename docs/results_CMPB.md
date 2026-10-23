@@ -20,13 +20,13 @@ Interpretation: ResNet is higher on PTB-XL and Georgia (+0.015/+0.031); TinyCNN 
 
 | Training augmentation | PTB-XL 0× | PTB-XL 4× | Chapman 0× | Chapman 4× | Georgia 0× | Georgia 4× |
 |---|---:|---:|---:|---:|---:|---:|
-| None | 0.787 | 0.637 | 0.885 | 0.725 | 0.711 | 0.589 |
-| Gaussian only | 0.787 | 0.640 | 0.885 | 0.731 | 0.713 | 0.593 |
-| Wander only | 0.782 | **0.751** | 0.874 | 0.847 | **0.722** | **0.684** |
-| Dropout only | 0.785 | 0.739 | **0.893** | 0.861 | 0.719 | 0.644 |
-| Full (primary) | 0.780 | **0.757** | 0.883 | **0.869** | 0.718 | 0.682 |
+| None | 0.787 | 0.661 | 0.885 | 0.727 | 0.711 | 0.586 |
+| Gaussian only | 0.787 | 0.664 | 0.885 | 0.733 | 0.713 | 0.590 |
+| Wander only | 0.782 | **0.756** | 0.874 | 0.850 | **0.722** | **0.685** |
+| Dropout only | 0.785 | 0.743 | **0.893** | 0.860 | 0.719 | 0.643 |
+| Full (primary) | 0.780 | **0.760** | 0.883 | **0.868** | 0.718 | 0.682 |
 
-Key finding: **baseline wander is the dominant component**; Gaussian-only is almost inert; dropout helps clean Chapman and intermediate noise; full augmentation gives the best balance on PTB-XL/Chapman.
+Key finding: **baseline wander is the dominant component**; Gaussian-only is almost inert; dropout helps clean Chapman and intermediate noise; full augmentation gives the best balance on PTB-XL/Chapman. Wander-only recovered 96%, 87%, and 103% of the full gain over no augmentation.
 
 ## 3. Test-time augmentation (TTA)
 
@@ -34,9 +34,9 @@ TTA averages 5 additional corruption draws at 1× or 4× training severity. It d
 
 | Cohort / test severity | Standard | TTA 1× | TTA 4× |
 |---|---:|---:|---:|
-| PTB-XL 4× | 0.757 | 0.750 | 0.748 |
-| Chapman 4× | 0.869 | 0.860 | 0.850 |
-| Georgia 4× | 0.682 | 0.677 | 0.663 |
+| PTB-XL 4× | 0.760 | 0.754 | 0.745 |
+| Chapman 4× | 0.868 | 0.859 | 0.848 |
+| Georgia 4× | 0.682 | 0.676 | 0.661 |
 
 Georgia ECE at 4× improved slightly (0.243 → 0.236 with TTA 4×), but AUROC fell. TTA is a null result and should be reported as such, not sold as a contribution.
 
