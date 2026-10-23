@@ -1,6 +1,6 @@
 # Noise-robust single-lead AI-ECG for hypertrophy screening
 
-Code and analysis for the manuscript (target: *Scientific Reports*):
+Code and analysis for the manuscript (target: *Journal of Biomedical Informatics*):
 
 > **Noise-robust single-lead AI-ECG for hypertrophy screening: augmentation ablation, external validation, and recalibration across label sources**
 
@@ -100,7 +100,7 @@ If you use this code, please cite the manuscript (under review):
 @article{guo2026noiseadapted,
   title   = {Noise-robust single-lead AI-ECG for hypertrophy screening: augmentation ablation, external validation, and recalibration across label sources},
   author  = {Guo, Jinkai and Chen, Hua and Wang, Yu and Song, Xiaopeng and Chang, Hao and Lv, Yueqi and Li, Mengfan and Chang, Jia xin and Yang, Chongdan and Zhou, Rongfang and Zhang, Shujie},
-  journal = {Scientific Reports},
+  journal = {Journal of Biomedical Informatics},
   year    = {2026},
   note    = {Under review}
 }
