@@ -34,7 +34,7 @@ Research-use-only screening model that estimates the probability of the PTB-XL H
 
 - PTB-XL v1.0.3 `records100`, folds 1–8 (17,418 records; HYP 12.17%).
 - Validation: fold 9 (2,183 records). Test: fold 10 (2,198 records).
-- Labels: PTB-XL HYP diagnostic superclass (LVH, RVH, left atrial overload/enlargement, septal hypertrophy).
+- Labels: PTB-XL HYP diagnostic superclass (LVH, RVH, left and right atrial overload/enlargement, septal hypertrophy).
 - No external data were used for training or fine-tuning.
 
 ## Architecture and training
@@ -60,6 +60,10 @@ Noise robustness at 4× training severity: PTB-XL 0.760 vs 0.661 (clean), Chapma
 - Decision curve analysis: net benefit over treat-all only at threshold probabilities ≤0.15 in PTB-XL and Georgia.
 - Occlusion sensitivity: small, diffuse probability drops without a single dominant 0.5-s segment.
 - Seed variability across seeds 42–44: PTB-XL 0.787 ± 0.007; Chapman 0.885 ± 0.005; Georgia 0.725 ± 0.009 AUROC.
+- Baseline comparison: a 437,569-parameter 1D ResNet achieved 0.795/0.870/0.749; the compact model is 8.4× smaller and within 0.031 AUROC.
+- Augmentation ablation: baseline wander carries most of the robustness benefit; Gaussian-only is nearly inert (4× AUROC 0.664/0.733/0.590).
+- TTA: no discrimination benefit (4× AUROC 0.754/0.859/0.676 for TTA-1×).
+- External recalibration: Platt scaling on a 20% external split reduced ECE to 0.029 (Chapman) and 0.006 (Georgia).
 
 ## Subgroups
 
@@ -72,9 +76,9 @@ Noise robustness at 4× training severity: PTB-XL 0.760 vs 0.661 (clean), Chapma
 - Labels are not echo-confirmed; PTB-XL uses a diagnostic superclass, Chapman uses expert SNOMED codes, and Georgia uses report-derived SNOMED codes.
 - Single-lead, 100 Hz input discards spatial information from the other 11 leads.
 - Simulated noise may not capture real wearable artifacts (motion, poor contact, device filtering).
-- External calibration is poor (ECE 0.10–0.27); recalibration on the target population is required before probability-based decisions.
+- External calibration is poor before recalibration (ECE 0.10–0.27); Platt scaling on 20% of each external sample improved held-out calibration (Chapman ECE 0.029; Georgia 0.006). Chapman values retain case-control prevalence; clinical usability is unvalidated.
 - No prospective clinical utility or outcome data.
-- No explainability analysis (saliency/occlusion) is included in v1.3.
+- Occlusion sensitivity is diffuse; no saliency or mechanistic explanation is available.
 
 ## Ethical and regulatory considerations
 

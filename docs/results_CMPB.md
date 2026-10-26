@@ -40,18 +40,20 @@ TTA averages 5 additional corruption draws at 1× or 4× training severity. It d
 
 Georgia ECE at 4× improved slightly (0.243 → 0.236 with TTA 4×), but AUROC fell. TTA is a null result and should be reported as such, not sold as a contribution.
 
-## 4. External recalibration (20% calibration / 80% evaluation; 10 splits)
+## 4. External recalibration
+
+ External recalibration on held-out splits
 
 | Cohort | Method | ECE | Slope | Intercept | AUROC |
 |---|---|---:|---:|---:|---:|
-| Chapman | None | 0.101 | 1.226 | −0.676 | 0.886 |
-| Chapman | Temperature | 0.083 | 0.935 | −0.676 | 0.886 |
-| Chapman | Platt | **0.035** | **1.016** | **0.024** | 0.886 |
-| Georgia | None | 0.276 | 0.546 | −1.884 | 0.718 |
-| Georgia | Temperature | 0.302 | 0.883 | −1.884 | 0.718 |
-| Georgia | Platt | **0.011** | **1.001** | **−0.007** | 0.718 |
+| Chapman | None | 0.100 | 1.208 | -0.688 | 0.882 |
+| Chapman | Platt | 0.029 | 0.995 | -0.015 | 0.882 |
+| Chapman | Temperature | 0.082 | 0.922 | -0.689 | 0.882 |
+| Georgia | None | 0.274 | 0.546 | -1.875 | 0.718 |
+| Georgia | Platt | 0.006 | 1.006 | 0.020 | 0.718 |
+| Georgia | Temperature | 0.301 | 0.903 | -1.875 | 0.718 |
 
-Key finding: the miscalibration is a **shift + scale** problem, not a simple temperature problem. A small labeled external sample (20%) plus Platt scaling restores calibration without changing AUROC.
+Means over 10 stratified splits with 20% used for calibration and 80% held out for evaluation. Calibration/evaluation n: Chapman 554/2,215; Georgia 2,069/8,275. Splits overlap. Chapman values apply to its case-control prevalence and do not establish calibration at 1.70% prevalence.
 
 ## 5. ResNet noise robustness
 

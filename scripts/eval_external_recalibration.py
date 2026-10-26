@@ -121,7 +121,11 @@ def main() -> None:
             n_splits=args.repeats, test_size=0.2, random_state=args.seed
         )
         rows = []
-        for rep, (cal_idx, eval_idx) in enumerate(splitter.split(logits, y)):
+        # StratifiedShuffleSplit yields (train, test); test_size=0.2 is
+        # deliberately the calibration subset, not the evaluation subset.
+        for rep, (eval_idx, cal_idx) in enumerate(splitter.split(logits, y)):
+            assert len(cal_idx) == int(np.ceil(0.2 * len(y)))
+            assert len(np.intersect1d(cal_idx, eval_idx)) == 0
             z_cal, y_cal = logits[cal_idx], y[cal_idx]
             z_eval, y_eval = logits[eval_idx], y[eval_idx]
 
@@ -131,6 +135,8 @@ def main() -> None:
                     "cohort": cohort_key,
                     "repeat": rep,
                     "method": "none",
+                    "n_calibration": len(cal_idx),
+                    "n_evaluation": len(eval_idx),
                     **eval_scores(y_eval, sigmoid(z_eval)),
                 }
             )
@@ -141,6 +147,8 @@ def main() -> None:
                     "cohort": cohort_key,
                     "repeat": rep,
                     "method": "temperature",
+                    "n_calibration": len(cal_idx),
+                    "n_evaluation": len(eval_idx),
                     "T": T,
                     **eval_scores(y_eval, sigmoid(z_eval / T)),
                 }
@@ -152,6 +160,8 @@ def main() -> None:
                     "cohort": cohort_key,
                     "repeat": rep,
                     "method": "platt",
+                    "n_calibration": len(cal_idx),
+                    "n_evaluation": len(eval_idx),
                     "platt_a": float(platt.coef_[0, 0]),
                     "platt_b": float(platt.intercept_[0]),
                     **eval_scores(y_eval, platt.predict_proba(z_eval.reshape(-1, 1))[:, 1]),
@@ -192,6 +202,8 @@ def main() -> None:
                 "repeats": args.repeats,
                 "seed": args.seed,
                 "calibration_fraction": 0.2,
+                "evaluation_fraction": 0.8,
+                "split_contract": "first=train=evaluation80; second=test=calibration20",
                 "cohorts": {k: str(v) for k, v in COHORTS.items()},
             },
             indent=2,

@@ -6,7 +6,7 @@ Code and analysis for the manuscript (target: *Journal of Biomedical Informatics
 
 The model is a compact one-dimensional CNN (52,225 parameters) that estimates the probability of the PTB-XL HYP diagnostic superclass from a 10-s, 100-Hz, single-lead (Lead I) ECG. Training uses wearable-like noise augmentation (Gaussian noise, baseline wander, random dropout). The model is evaluated internally on PTB-XL fold 10 and externally on Chapman-Shaoxing and the Georgia 12-Lead ECG Challenge Database.
 
-**Status:** research use only; not a medical device. The manuscript is under review.
+**Status:** research use only; not a medical device.
 
 ## Main results
 
@@ -25,7 +25,7 @@ Across three training seeds (42–44), AUROC was 0.787 ± 0.007 (PTB-XL), 0.885 
 | Baselines | ResNet 0.795/0.870/0.749; compact CNN 0.780/0.883/0.718; feature trees 0.763/0.833/0.716; age-sex 0.606/0.662/0.511 |
 | Augmentation ablation | At 4×, full 0.760/0.868/0.682; wander-only 0.756/0.850/0.685; Gaussian-only 0.664/0.733/0.590; none 0.661/0.727/0.586 |
 | Test-time augmentation | No AUROC gain (4×: 0.754/0.859/0.676 for TTA-1×) |
-| External recalibration | Platt ECE 0.035 (Chapman) and 0.011 (Georgia); temperature scaling did not correct the intercept |
+| External recalibration | Platt ECE 0.029 (Chapman) and 0.006 (Georgia); temperature scaling did not correct the intercept |
 
 ## Data
 
@@ -94,7 +94,7 @@ See [`docs/model_card.md`](docs/model_card.md) for intended use, training data, 
 
 ## Citation
 
-If you use this code, please cite the manuscript (under review):
+If you use this code, please cite the manuscript (unpublished manuscript):
 
 ```bibtex
 @article{guo2026noiseadapted,
@@ -116,3 +116,7 @@ Hua Chen, MD, PhD
 Department of Cardiology, Inner Mongolia Autonomous Region People's Hospital  
 No.20 Zhaowuda Road, Xincheng District, Hohhot, Inner Mongolia Autonomous Region, P.R. China 010017  
 Email: Zxcv8521@163.com
+
+## Recalibration correction 26 October 2026
+
+The original script reversed calibration and evaluation indices (80/20 instead of 20/80). Corrected results use 20% for fitting and 80% for held-out evaluation in 10 stratified splits. See docs/RECALIBRATION_CORRECTION.md.
